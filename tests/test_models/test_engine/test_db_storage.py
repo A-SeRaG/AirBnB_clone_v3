@@ -94,11 +94,11 @@ class TestDBStorage(unittest.TestCase):
         new_state = State(**state_data)
         models.storage.new(new_state)
         session = models.storage._DBStorage_session
-        ret_state = session.query(State).filter_by(id=new_state).first()
+        ret_state = session.query(State).filter_by(id=new_state.id).first() #NONE
 
         self.assertEqual(ret_state.id, new_state.id)
         self.assertEqual(ret_state.name, new_state.name)
-        self.assertIsNone(ret_state)
+        self.assertIsNotNone(ret_state)
 
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_save(self):
@@ -108,11 +108,11 @@ class TestDBStorage(unittest.TestCase):
         models.storage.new(new_state)
         models.storage.save(new_state)
         session = models.storage._DBStorage_session
-        ret_state = session.query(State).filter_by(id=new_state).first()
+        ret_state = session.query(State).filter_by(id=new_state.id).first() #NONE
         
         self.assertEqual(ret_state.id, new_state.id)
         self.assertEqual(ret_state.name, new_state.name)
-        self.assertIsNone(ret_state)
+        self.assertIsNotNone(ret_state)
 
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_get(self):
