@@ -178,7 +178,7 @@ No known bugs at this time.
 
 ## Authors
 
-Ahmed Serag - [Github](https://github.com/a-serag) / [Twitter](https://twitter.com/)
+Ahmed Serag - [Github](https://github.com/A-SeRaG) / [X](https://x.com/CSE_A_SERAG)
 
 ## License
 
