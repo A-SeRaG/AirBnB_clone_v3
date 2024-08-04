@@ -97,3 +97,4 @@ class DBStorage:
             return len(all_giv_cls)
         if cls not in classes.values():
             return None
+
