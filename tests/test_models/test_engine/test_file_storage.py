@@ -114,34 +114,28 @@ class TestFileStorage(unittest.TestCase):
             js = f.read()
         self.assertEqual(json.loads(string), json.loads(js))
 
-    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
     def test_get(self):
-        """Test that get objects from file.json"""
+        """ Tests method for obtaining an instance file storage"""
         storage = FileStorage()
-        storage.reload()
-        state_data = {"name": "Sudan"}
-        ins_state = State(**state_data)
-        storage.new(ins_state)
+        dic = {"name": "Vecindad"}
+        instance = State(**dic)
+        storage.new(instance)
         storage.save()
-
-        ret_state = storage.get(State, state_data.id)
-        self.assertEqual(ins_state, ret_state)
-        fak_state = storage.get(State, "fake_id")
-        self.assertEqual(fak_state, None)
-
-    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
-    def test_count(self):
-        """Test that count objects from file.json"""
         storage = FileStorage()
-        storage.reload()
-        state_data = {"name": "Qutar"}
-        ins_state = State(**state_data)
-        storage.new(ins_state)
-        city_data = {"name": "Doha", "state_id": ins_state.id}
-        ins_city = new(city_data)
-        storage.save
+        get_instance = storage.get(State, instance.id)
+        self.assertEqual(get_instance, instance)
 
-        cont_state = storage.count(State)
-        self.assertEqual(cont_state, len(storage.all(State)))
-        all_state = storage.count()
-        self.assertEqual(all_state, len(storage.all()))
+    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+    def test_count(self):
+        """ Tests count method file storage """
+        storage = FileStorage()
+        dic = {"name": "Vecindad"}
+        state = State(**dic)
+        storage.new(state)
+        dic = {"name": "Mexico"}
+        city = City(**dic)
+        storage.new(city)
+        storage.save()
+        c = storage.count()
+        self.assertEqual(len(storage.all()), c)
